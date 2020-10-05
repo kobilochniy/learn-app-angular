@@ -6,6 +6,7 @@ import {switchMap, tap} from 'rxjs/operators';
 import {UserStatisticService} from '../service/user-statistic.service';
 import {Observable} from 'rxjs';
 import {UserStatistic} from '../model/user-statistic';
+import {GroupService} from '../service/group.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class TestComponent implements OnInit {
   currentWord: any;
 
   constructor(private languageService: LanguageService,
+              private groupService: GroupService,
               private testService: TestService,
               private userStatisticService: UserStatisticService) {
   }
@@ -46,7 +48,7 @@ export class TestComponent implements OnInit {
       .subscribe(value => this.test = value);
   }
 
-  private initData() {
-
+  private initData(): void {
+    this.groupService.getSelectGroup();
   }
 }

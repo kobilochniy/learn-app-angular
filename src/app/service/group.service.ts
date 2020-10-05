@@ -15,4 +15,8 @@ export class GroupService {
   public findAllGroup(): Observable<Group[]> {
     return this.server.get<Group[]>('api/group').pipe(map(value => value['data']));
   }
+
+  getSelectGroup(): Group {
+    return null;
+  }
 }

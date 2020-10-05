@@ -8,6 +8,25 @@ import {FooterComponent} from './footer/footer.component';
 import {TestComponent} from './test/test.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UrlPrefixInterceptorService} from './intercepter/url-prefix-interceptor.service';
+import {RouterModule, Routes} from '@angular/router';
+
+const routes: Routes = [
+
+  {
+    path: '',
+    redirectTo: '/test',
+    pathMatch: 'full'
+  },
+  {
+    path: 'test',
+    component: TestComponent
+  },
+  {
+    path: 'group',
+    loadChildren: () => import('./group/group.module').then(m => m.GroupModule)
+  },
+  {path: '**', redirectTo: '/'}
+];
 
 @NgModule({
   declarations: [
@@ -19,7 +38,8 @@ import {UrlPrefixInterceptorService} from './intercepter/url-prefix-interceptor.
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
