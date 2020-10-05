@@ -1,0 +1,40 @@
+<main class="site-main">
+  <div class="container">
+
+    <section class="tests">
+      <div class="tests-nav">
+        <div class="nav-block nav-left">
+          <div class="current-language"><span>Язык:&nbsp;</span><span id="language">Все</span></div>
+          <div class="current-source">Группа слов: <span id="group">Все слова</span>&nbsp;</div>
+        </div>
+        <div class="nav-block nav-right">
+          <div class="results-clear"><span class="btn btn-inline">Очистить прогресс</span></div>
+          <div class="results-count">Ответов:
+            <span>{{(userStatistic$ | async)?.resultsCountCorrect}}
+              /{{(userStatistic$ | async)?.resultsCountAll}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="test-inner">
+        <div class="question" id="question">{{test?.word.text}}</div>
+        <div class="answers">
+          <div id="answers">
+            <div *ngFor="let answer of test?.answers.data"
+                 class="answer"
+                 (click)="sendAnswer(answer.id)"
+                 data-id="{{answer.id}}">{{answer.text}}</div>
+          </div>
+          <div class="right-answer"
+               [ngClass]="result ? 'true':'false' "
+               *ngIf="currentWord"
+               id="correctAnswer">{{currentWord?.text}} - {{currentWord?.translations[0]?.text}}</div>
+        </div>
+        <div class="question-buttons" (click)="loadTest()">
+          <div class="btn-next">
+            <span class="btn btn-bg btn-icon btn-icon-right">Следующий вопрос</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
